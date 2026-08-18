@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hotel checkout visual-review fixture</title>
+  <style>
+    :root { font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #172033; background: #f5f7fb; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    header { background: #102b4e; color: white; padding: 18px 5vw; display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-weight: 800; letter-spacing: -.02em; }
+    .step { color: #b9c9de; font-size: 14px; }
+    main { width: min(1120px, 92vw); margin: 34px auto 120px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 28px; }
+    .card { background: white; border: 1px solid #dde3ed; border-radius: 16px; box-shadow: 0 8px 30px rgba(24,39,75,.08); overflow: hidden; }
+    .hotel { display: grid; grid-template-columns: 210px 1fr; }
+    .photo { min-height: 190px; background: linear-gradient(145deg,#1b769f,#94d6cf 48%,#ead8a9 49%,#d3a85a); position: relative; }
+    .photo:after { content: "Oceanfront"; position: absolute; left: 14px; bottom: 14px; background: rgba(255,255,255,.92); padding: 6px 10px; border-radius: 99px; font-size: 12px; font-weight: 700; }
+    .hotel-copy, .section, .summary { padding: 24px; }
+    h1 { font-size: clamp(25px,3vw,38px); margin: 0 0 8px; letter-spacing: -.035em; }
+    h2 { font-size: 19px; margin: 0 0 16px; }
+    p { line-height: 1.45; }
+    .muted { color: #6d7789; }
+    .internal { display: inline-block; margin-top: 12px; color: #6f7f96; background: #edf1f6; border-radius: 6px; padding: 5px 8px; font-family: ui-monospace, monospace; font-size: 12px; }
+    .section { border-top: 1px solid #edf0f5; }
+    .row { display: flex; justify-content: space-between; gap: 24px; margin: 12px 0; }
+    .total { border-top: 1px solid #ccd4e0; padding-top: 16px; margin-top: 18px; font-size: 21px; font-weight: 800; }
+    .fine-print { color: #c2c7cf; font-size: 12px; margin-top: 16px; }
+    label { display:block; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+    input { width: 100%; padding: 13px; border: 1px solid #aeb8c7; border-radius: 9px; font-size: 16px; margin-bottom: 16px; }
+    .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+    button { border: 0; border-radius: 10px; padding: 15px; font-weight: 800; font-size: 15px; cursor: pointer; }
+    .secondary { background: #e5eaf1; color: #26344c; }
+    .primary { background: #1769e0; color: white; }
+    .sticky { display:none; }
+    @media (max-width: 700px) {
+      header { padding: 14px 18px; }
+      .step { display:none; }
+      main { width: 100%; margin: 0 0 80px; display:block; }
+      .card { border: 0; border-radius: 0; box-shadow: none; }
+      .hotel { grid-template-columns: 1fr; }
+      .photo { min-height: 155px; }
+      .hotel-copy, .section, .summary { padding: 18px; }
+      h1 { font-size: 27px; }
+      .actions { grid-template-columns: 1fr 1fr; }
+      .desktop-actions { margin-bottom: 20px; }
+      .sticky { position: fixed; display:flex; z-index:5; left:0; right:0; bottom:0; align-items:center; justify-content:space-between; padding: 12px 16px; background:white; border-top:1px solid #d5dce7; box-shadow: 0 -8px 22px rgba(24,39,75,.14); }
+      .sticky strong { font-size: 18px; }
+      .sticky button { padding: 13px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header><div class="brand">Northstar Travel</div><div class="step">Secure checkout · Step 2 of 2</div></header>
+  <main>
+    <div class="card">
+      <div class="hotel">
+        <div class="photo" aria-label="Illustrated oceanfront hotel"></div>
+        <div class="hotel-copy">
+          <h1>Harbor House San Diego</h1>
+          <div class="muted">2 nights · Sep 18–20 · 1 room · 2 guests</div>
+          <div class="internal">Xeni UAT rate · supplier_id 88319</div>
+        </div>
+      </div>
+      <div class="section">
+        <h2>Guest details</h2>
+        <label for="name">Full name</label><input id="name" value="Jordan Lee" />
+        <label for="email">Email</label><input id="email" value="jordan@example.com" />
+      </div>
+    </div>
+    <aside class="card summary">
+      <h2>Price details</h2>
+      <div class="row"><span>Room · 2 nights</span><strong>$1,080</strong></div>
+      <div class="row"><span>Taxes and fees</span><strong>$169</strong></div>
+      <div class="row"><span>Resort fee at property</span><strong>$48</strong></div>
+      <div class="row total"><span>Total today</span><span>$1,249</span></div>
+      <p class="fine-print">Free cancellation until Sep 16. After that, the first night is non-refundable.</p>
+      <div class="actions desktop-actions">
+        <button class="secondary">Reserve room</button>
+        <button class="primary">Book now · $1,199</button>
+      </div>
+    </aside>
+  </main>
+  <div class="sticky"><strong>$1,249</strong><button class="primary">Book now · $1,199</button></div>
+</body>
+</html>
