@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Solmere package checkout</title>
+  <style>
+    :root {
+      background: #f2f5fa;
+      color: #14243a;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; overflow-x: hidden; }
+    header {
+      align-items: center;
+      background: #172f57;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      padding: 18px 5vw;
+    }
+    .brand { font-size: 17px; font-weight: 850; letter-spacing: -.02em; }
+    .progress { color: #cfdbeb; font-size: 13px; }
+    main {
+      display: grid;
+      gap: 26px;
+      grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr);
+      margin: 34px auto 100px;
+      max-width: 1140px;
+      width: 92vw;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #d9e2ee;
+      border-radius: 17px;
+      box-shadow: 0 12px 34px rgba(19, 40, 70, .09);
+      overflow: hidden;
+    }
+    .package { display: grid; grid-template-columns: 235px minmax(0, 1fr); }
+    .art {
+      background: linear-gradient(145deg, #1d416e 0 33%, #5e9db2 34% 57%, #f0d99e 58% 74%, #d68e62 75%);
+      min-height: 216px;
+      position: relative;
+    }
+    .art::after {
+      background: rgba(255,255,255,.94);
+      border-radius: 999px;
+      bottom: 14px;
+      content: "Fictional package";
+      font-size: 11px;
+      font-weight: 800;
+      left: 14px;
+      padding: 6px 9px;
+      position: absolute;
+    }
+    .copy, .section, .summary { padding: 25px; }
+    h1 { font-size: clamp(28px, 3vw, 40px); letter-spacing: -.045em; line-height: 1.03; margin: 0 0 10px; }
+    h2 { font-size: 19px; letter-spacing: -.025em; margin: 0 0 17px; }
+    h3 { font-size: 14px; margin: 0 0 8px; }
+    p { line-height: 1.5; }
+    .muted { color: #536a83; }
+    .description { margin: 19px 0 0; max-width: 49ch; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .chip { background: #edf4fb; border-radius: 999px; color: #34506e; font-size: 12px; font-weight: 750; padding: 7px 10px; }
+    .section { border-top: 1px solid #e8edf4; }
+    .section-grid { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
+    label { display: block; font-size: 13px; font-weight: 800; margin-bottom: 7px; }
+    input {
+      border: 1px solid #9eafc5;
+      border-radius: 9px;
+      color: #14243a;
+      font: inherit;
+      font-size: 15px;
+      padding: 12px;
+      width: 100%;
+    }
+    .summary { align-self: start; position: relative; }
+    .stock-badge {
+      background: #e3a129;
+      border-radius: 999px;
+      color: #3c2404;
+      font-size: 11px;
+      font-weight: 850;
+      padding: 8px 12px;
+      position: absolute;
+      right: -18px;
+      top: -14px;
+      transform: rotate(3deg);
+      z-index: 2;
+    }
+    .notice {
+      background: #fbfcfe;
+      border: 1px solid #e6ebf3;
+      border-radius: 10px;
+      color: #acb5c2;
+      font-size: 12px;
+      margin: 16px 0 20px;
+      padding: 10px 12px;
+    }
+    .row { display: flex; gap: 18px; justify-content: space-between; margin: 13px 0; }
+    .total { border-top: 1px solid #c7d4e3; font-size: 21px; font-weight: 850; margin-top: 20px; padding-top: 17px; }
+    .policy {
+      border-top: 1px solid #e8edf4;
+      color: #50647d;
+      font-size: 12px;
+      margin-top: 18px;
+      overflow: hidden;
+      padding-top: 15px;
+      text-overflow: clip;
+      white-space: nowrap;
+    }
+    .cta-wrap { margin-top: 20px; position: relative; }
+    button {
+      background: #225cce;
+      border: 0;
+      border-radius: 10px;
+      color: #fff;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 850;
+      padding: 15px;
+      width: 100%;
+    }
+    .occluder {
+      align-items: center;
+      background: #fff;
+      border: 1px solid #bdc9da;
+      border-radius: 9px;
+      box-shadow: 0 8px 19px rgba(20, 36, 58, .17);
+      color: #29405d;
+      display: flex;
+      font-size: 11px;
+      font-weight: 750;
+      height: 52px;
+      justify-content: center;
+      padding: 8px;
+      position: absolute;
+      right: -8px;
+      text-align: center;
+      top: 8px;
+      width: 174px;
+      z-index: 3;
+    }
+    .footnote { color: #60748c; font-size: 12px; margin: 18px 0 0; }
+    @media (max-width: 700px) {
+      header { padding: 15px 18px; }
+      .progress { display: none; }
+      main { display: block; margin: 0 0 60px; width: 100%; }
+      .card { border: 0; border-radius: 0; box-shadow: none; }
+      .package { display: block; }
+      .art { min-height: 151px; }
+      .copy, .section, .summary { padding: 19px 18px; }
+      h1 { font-size: 29px; }
+      .section-grid { grid-template-columns: 1fr; }
+      .summary { border-top: 10px solid #f2f5fa; }
+      .stock-badge { right: -7px; top: -10px; }
+      .policy { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header><div class="brand">Northstar Travel</div><div class="progress">Secure checkout · Step 2 of 2</div></header>
+  <main>
+    <section class="card">
+      <div class="package">
+        <div class="art" aria-label="Illustrated fictional island package"></div>
+        <div class="copy">
+          <h1>Solmere Island Escape</h1>
+          <div class="muted">Port Rowan → Solmere · Nov 8–12 · 1 room · 2 guests</div>
+          <p class="description">Four nights at a fictional island lodge with breakfast, a ferry transfer, and a sunset sail.</p>
+          <div class="chips"><span class="chip">Breakfast included</span><span class="chip">Ferry transfer</span><span class="chip">Sunset sail</span></div>
+        </div>
+      </div>
+      <div class="section">
+        <h2>Traveler details</h2>
+        <div class="section-grid">
+          <div><label for="name">Lead traveler</label><input id="name" value="Jordan Lee" /></div>
+          <div><label for="email">Email</label><input id="email" value="jordan@example.com" /></div>
+        </div>
+        <p class="footnote">Names must match the fictional reservation record.</p>
+      </div>
+    </section>
+    <aside class="card summary">
+      <div class="stock-badge">Only 1 package left</div>
+      <h2>Price details</h2>
+      <div class="notice">Payment protection has not been checked for this package.</div>
+      <div class="row"><span>Room package · 4 nights</span><strong>$680</strong></div>
+      <div class="row"><span>Taxes and fees</span><strong>$34</strong></div>
+      <div class="row"><span>Ferry transfer</span><strong>$12</strong></div>
+      <div class="row total"><span>Total today</span><span>$742</span></div>
+      <div class="policy">Changeable until Nov 1 · Ferry departure times and baggage limits are shown after payment confirmation.</div>
+      <div class="cta-wrap"><button>Continue to payment</button><div class="occluder">Need help? Start a chat</div></div>
+    </aside>
+  </main>
+</body>
+</html>
