@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Northstar travel results</title>
+  <style>
+    :root {
+      background: #f5f7fb;
+      color: #182237;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    header {
+      align-items: center;
+      background: #1b2948;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      padding: 19px 5vw;
+    }
+    .brand { font-size: 17px; font-weight: 850; letter-spacing: -.025em; }
+    .account { align-items: center; display: flex; gap: 14px; }
+    .avatar { align-items: center; background: #d7e6ff; border-radius: 50%; color: #284a83; display: flex; font-size: 12px; font-weight: 800; height: 30px; justify-content: center; width: 30px; }
+    .search-shell { background: #fff; border-bottom: 1px solid #e0e6f0; padding: 22px 5vw; }
+    .search-bar { align-items: end; background: #fff; border: 1px solid #cdd7e7; border-radius: 13px; box-shadow: 0 8px 18px rgba(25, 42, 76, .07); display: grid; gap: 1px; grid-template-columns: 1fr 1fr 1.15fr auto; margin: 0 auto; max-width: 1140px; overflow: hidden; }
+    .field { border-right: 1px solid #e3e8f0; padding: 11px 16px; }
+    .field-label { color: #65758e; font-size: 11px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
+    .field-value { font-size: 14px; font-weight: 750; margin-top: 4px; }
+    .search-button { background: #2163d5; border: 0; border-radius: 9px; color: #fff; cursor: pointer; font: inherit; font-weight: 800; margin: 8px; padding: 13px 21px; }
+    main { display: grid; gap: 26px; grid-template-columns: 216px minmax(0, 1fr); margin: 31px auto 90px; max-width: 1140px; width: 92vw; }
+    aside { align-self: start; background: #fff; border: 1px solid #dfe6f0; border-radius: 14px; padding: 18px; }
+    aside h2 { font-size: 16px; margin: 0 0 18px; }
+    .filter-group { border-top: 1px solid #e9edf3; padding: 17px 0 3px; }
+    .filter-group:first-of-type { border-top: 0; padding-top: 0; }
+    .filter-title { font-size: 12px; font-weight: 850; margin-bottom: 10px; }
+    .check { align-items: center; color: #52627a; display: flex; font-size: 12px; gap: 8px; margin: 9px 0; }
+    .check input { accent-color: #2163d5; }
+    .results-header { align-items: end; display: flex; justify-content: space-between; margin-bottom: 15px; }
+    .results-header h1 { font-size: 27px; letter-spacing: -.04em; margin: 0; }
+    .results-header p { color: #62718a; font-size: 13px; margin: 5px 0 0; }
+    select { background: #fff; border: 1px solid #cbd6e5; border-radius: 8px; color: #30425e; font: inherit; font-size: 12px; padding: 9px 12px; }
+    .result-card { background: #fff; border: 1px solid #dfe6f0; border-radius: 16px; box-shadow: 0 11px 28px rgba(28, 44, 76, .07); display: grid; gap: 0; grid-template-columns: 160px minmax(0, 1fr) 162px; margin-bottom: 17px; min-height: 215px; overflow: hidden; }
+    .thumb { background: linear-gradient(150deg, #244a80 0 35%, #72a9bd 36% 57%, #f0cf84 58% 73%, #d98762 74%); min-height: 215px; position: relative; }
+    .thumb::after { background: rgba(255,255,255,.92); border-radius: 999px; bottom: 13px; content: "Fictional stay"; font-size: 10px; font-weight: 800; left: 12px; padding: 5px 8px; position: absolute; }
+    .result-copy { padding: 20px 20px 18px; }
+    .eyebrow { color: #65748b; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    .result-copy h2 { font-size: 21px; letter-spacing: -.03em; margin: 7px 0 7px; }
+    .route { color: #3f5370; font-size: 13px; font-weight: 720; }
+    .meta { color: #6d7b90; font-size: 12px; margin-top: 8px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 17px; }
+    .badge { background: #eef2f8; border-radius: 999px; color: #405675; font-size: 11px; font-weight: 800; padding: 6px 8px; }
+    .badge.good { background: #e3f5ec; color: #1e6a4b; }
+    .timeline { align-items: center; border-top: 1px solid #edf0f5; display: flex; gap: 10px; margin-top: 17px; padding-top: 13px; }
+    .time { font-size: 12px; font-weight: 800; }
+    .connection { color: #62728a; font-size: 11px; }
+    .price { border-left: 1px solid #edf0f5; display: flex; flex-direction: column; justify-content: center; padding: 18px; }
+    .from { color: #67778f; font-size: 11px; }
+    .amount { color: #172a4c; font-size: 29px; font-weight: 900; letter-spacing: -.055em; margin-top: 4px; }
+    .per { color: #596a83; font-size: 11px; }
+    .total { color: #263a5b; font-size: 11px; font-weight: 750; margin-top: 14px; }
+    .book { background: #2163d5; border: 0; border-radius: 8px; color: #fff; cursor: pointer; font: inherit; font-size: 12px; font-weight: 850; margin-top: 14px; padding: 11px 8px; }
+    .policy { color: #6b788d; font-size: 10px; line-height: 1.4; margin-top: 10px; }
+    .results-note { color: #748197; font-size: 11px; text-align: center; }
+    @media (max-width: 760px) {
+      header { padding: 16px 18px; }
+      .account span { display: none; }
+      .search-shell { padding: 14px 18px; }
+      .search-bar { grid-template-columns: 1fr 1fr; }
+      .field { padding: 10px 12px; }
+      .field:nth-child(2) { border-right: 0; }
+      .field:nth-child(3) { border-top: 1px solid #e3e8f0; }
+      .search-button { grid-column: span 2; margin: 8px; }
+      main { display: block; margin: 22px 18px 70px; width: auto; }
+      aside { display: none; }
+      .results-header { align-items: start; gap: 13px; }
+      .results-header h1 { font-size: 24px; }
+      .result-card { grid-template-columns: 112px minmax(0, 1fr); }
+      .thumb { min-height: 250px; }
+      .result-copy { padding: 17px 15px; }
+      .result-copy h2 { font-size: 18px; }
+      .price { border-left: 0; border-top: 1px solid #edf0f5; grid-column: span 2; padding: 15px; }
+      .price-row { align-items: center; display: flex; justify-content: space-between; }
+      .book { margin-top: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <header><div class="brand">Northstar Travel</div><div class="account"><span>Trips</span><span>Saved</span><div class="avatar">JL</div></div></header>
+  <div class="search-shell">
+    <div class="search-bar">
+      <div class="field"><div class="field-label">From</div><div class="field-value">Port Rowan</div></div>
+      <div class="field"><div class="field-label">To</div><div class="field-value">Solmere</div></div>
+      <div class="field"><div class="field-label">Dates · Travelers</div><div class="field-value">Nov 8–12 · 2 travelers</div></div>
+      <button class="search-button">Search</button>
+    </div>
+  </div>
+  <main>
+    <aside>
+      <h2>Filter results</h2>
+      <div class="filter-group"><div class="filter-title">Stay type</div><label class="check"><input type="checkbox" checked /> Lodges</label><label class="check"><input type="checkbox" /> Guest houses</label></div>
+      <div class="filter-group"><div class="filter-title">Included</div><label class="check"><input type="checkbox" /> Breakfast</label><label class="check"><input type="checkbox" /> Flexible cancel</label></div>
+      <div class="filter-group"><div class="filter-title">Price per traveler</div><label class="check"><input type="checkbox" /> Under $200</label><label class="check"><input type="checkbox" /> $200–$400</label></div>
+    </aside>
+    <section>
+      <div class="results-header"><div><h1>Solmere stays</h1><p>12 fictional places match your search</p></div><select aria-label="Sort results"><option>Recommended</option></select></div>
+      <article class="result-card">
+        <div class="thumb" aria-label="Illustrated fictional island lodge"></div>
+        <div class="result-copy">
+          <div class="eyebrow">Top pick · Bayline collection</div>
+          <h2>Bayline House</h2>
+          <div class="route">Port Rowan → Solmere</div>
+          <div class="meta">Nov 9–13 · 4 nights · 1 room · 2 guests</div>
+          <div class="badges"><span class="badge good">Direct</span><span class="badge good">Free cancellation</span><span class="badge">Breakfast included</span></div>
+          <div class="timeline"><span class="time">08:40</span><span>Port Rowan</span><span class="connection">1 connection · 35m</span><span class="time">11:50</span></div>
+        </div>
+        <div class="price">
+          <div class="price-row"><div><div class="from">From</div><div class="amount">$129</div><div class="per">per traveler</div></div></div>
+          <div class="total">$774 total · 2 travelers</div>
+          <button class="book">View stay</button>
+          <div class="policy">Free cancellation shown above. No refunds after purchase.</div>
+        </div>
+      </article>
+      <article class="result-card">
+        <div class="thumb" aria-label="Illustrated fictional garden inn"></div>
+        <div class="result-copy">
+          <div class="eyebrow">Quiet favorite · Garden route</div>
+          <h2>Lantern Orchard Inn</h2>
+          <div class="route">Port Rowan → Solmere</div>
+          <div class="meta">Nov 8–12 · 4 nights · 1 room · 2 guests</div>
+          <div class="badges"><span class="badge good">Breakfast included</span><span class="badge">Pay later</span></div>
+          <div class="timeline"><span class="time">10:15</span><span>Port Rowan</span><span class="connection">Ferry included</span><span class="time">13:05</span></div>
+        </div>
+        <div class="price">
+          <div class="price-row"><div><div class="from">From</div><div class="amount">$188</div><div class="per">per traveler</div></div></div>
+          <div class="total">$376 total · 2 travelers</div>
+          <button class="book">View stay</button>
+          <div class="policy">Taxes and fees are shown before confirmation.</div>
+        </div>
+      </article>
+      <div class="results-note">Prices and descriptions are fictional evaluation content.</div>
+    </section>
+  </main>
+</body>
+</html>
