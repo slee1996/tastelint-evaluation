@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Juniper House booking review</title>
+  <style>
+    :root {
+      color: #172b3a;
+      background: #f3f7f6;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    header {
+      align-items: center;
+      background: #173f4a;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      padding: 18px 5vw;
+    }
+    .brand { font-size: 17px; font-weight: 800; letter-spacing: -.02em; }
+    .progress { color: #d7e7e5; font-size: 13px; }
+    main {
+      display: grid;
+      gap: 26px;
+      grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr);
+      margin: 34px auto 100px;
+      max-width: 1120px;
+      width: 92vw;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #d9e5e3;
+      border-radius: 18px;
+      box-shadow: 0 12px 32px rgba(22, 59, 69, .08);
+      overflow: hidden;
+    }
+    .stay { display: grid; grid-template-columns: 230px minmax(0, 1fr); }
+    .art {
+      background: linear-gradient(145deg, #245b68 0 37%, #73b5ab 38% 58%, #e9c77e 59% 74%, #d39258 75%);
+      min-height: 205px;
+      position: relative;
+    }
+    .art::after {
+      background: rgba(255, 255, 255, .93);
+      border-radius: 999px;
+      bottom: 14px;
+      content: "Fictional coastal stay";
+      font-size: 11px;
+      font-weight: 750;
+      left: 14px;
+      padding: 6px 9px;
+      position: absolute;
+    }
+    .copy, .section, .summary { padding: 25px; }
+    h1 { font-size: clamp(27px, 3vw, 40px); letter-spacing: -.045em; line-height: 1.03; margin: 0 0 10px; }
+    h2 { font-size: 19px; letter-spacing: -.02em; margin: 0 0 17px; }
+    p { line-height: 1.5; }
+    .muted { color: #5d7180; }
+    .description { margin: 18px 0 0; max-width: 50ch; }
+    .section { border-top: 1px solid #e7efed; }
+    .section-grid { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
+    label { display: block; font-size: 13px; font-weight: 750; margin-bottom: 7px; }
+    input {
+      border: 1px solid #9eb5b2;
+      border-radius: 9px;
+      color: #172b3a;
+      font: inherit;
+      font-size: 15px;
+      padding: 12px;
+      width: 100%;
+    }
+    .summary { align-self: start; }
+    .row { display: flex; gap: 18px; justify-content: space-between; margin: 13px 0; }
+    .total { border-top: 1px solid #c6d6d3; font-size: 21px; font-weight: 800; margin-top: 20px; padding-top: 17px; }
+    .property-fee {
+      border-top: 1px solid #edf2f1;
+      color: #526975;
+      font-size: 13px;
+      margin-top: 17px;
+      padding-top: 15px;
+    }
+    .fine-print { color: #526975; font-size: 12px; margin: 18px 0 0; }
+    button {
+      background: #147d68;
+      border: 0;
+      border-radius: 10px;
+      color: #fff;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 800;
+      margin-top: 20px;
+      padding: 15px;
+      width: 100%;
+    }
+    @media (max-width: 700px) {
+      header { padding: 15px 18px; }
+      .progress { display: none; }
+      main { display: block; margin: 0 0 70px; width: 100%; }
+      .card { border: 0; border-radius: 0; box-shadow: none; }
+      .stay { display: block; }
+      .art { min-height: 150px; }
+      .copy, .section, .summary { padding: 19px 18px; }
+      h1 { font-size: 29px; }
+      .section-grid { grid-template-columns: 1fr; }
+      .summary { border-top: 10px solid #f3f7f6; }
+    }
+  </style>
+</head>
+<body>
+  <header><div class="brand">Northstar Travel</div><div class="progress">Review booking · Step 2 of 2</div></header>
+  <main>
+    <section class="card">
+      <div class="stay">
+        <div class="art" aria-label="Illustrated fictional coastal hotel"></div>
+        <div class="copy">
+          <h1>Juniper House</h1>
+          <div class="muted">Port Rowan · 3 nights · Oct 12–15 · 1 room · 2 guests</div>
+          <p class="description">A quiet fictional harbor stay with a garden terrace and late morning checkout.</p>
+        </div>
+      </div>
+      <div class="section">
+        <h2>Guest details</h2>
+        <div class="section-grid">
+          <div><label for="name">Full name</label><input id="name" value="Jordan Lee" /></div>
+          <div><label for="email">Email</label><input id="email" value="jordan@example.com" /></div>
+        </div>
+      </div>
+    </section>
+    <aside class="card summary">
+      <h2>Price details</h2>
+      <div class="row"><span>Room · 3 nights</span><strong>$1,140</strong></div>
+      <div class="row"><span>Taxes and fees</span><strong>$162</strong></div>
+      <div class="row total"><span>Total today</span><span>$1,302</span></div>
+      <div class="row property-fee"><span>Property fee</span><strong>$48</strong></div>
+      <p class="fine-print">The property fee is collected separately. Free cancellation until Oct 9.</p>
+      <button>Reserve now · $1,302</button>
+    </aside>
+  </main>
+</body>
+</html>
